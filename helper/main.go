@@ -1,11 +1,17 @@
 package helper
 
-import "fmt"
+import (
+	"log"
+	"os"
+	"strings"
+)
 
-func main() {
-	fmt.Println("Hello World!")
-}
-
-func ReadFile() {
-	fmt.Println("Reading File..")
+func ReadFile(filename string) ([]string, error) {
+	content, err := os.ReadFile("input/" + filename + ".txt")
+	if err != nil {
+		log.Fatal(err)
+		return nil, err
+	}
+	s := strings.Split(string(content), "\n")
+	return s, nil
 }
