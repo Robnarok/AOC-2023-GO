@@ -81,3 +81,72 @@ func Test_parseSet(t *testing.T) {
 		})
 	}
 }
+
+func Test_maxCubes(t *testing.T) {
+	type args struct {
+		input []Cubes
+	}
+	tests := []struct {
+		name string
+		args args
+		want Cubes
+	}{
+		{
+			name: "oneInEachGame",
+			args: args{
+				input: []Cubes{
+					{blue: 1, red: 0, green: 0},
+					{blue: 0, red: 1, green: 0},
+					{blue: 0, red: 0, green: 1},
+				},
+			},
+			want: Cubes{
+				red:   1,
+				blue:  1,
+				green: 1,
+			},
+		}}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := maxCubes(tt.args.input); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("maxCubes() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestCubes_getPower(t *testing.T) {
+	type fields struct {
+		red   int
+		blue  int
+		green int
+	}
+	tests := []struct {
+		name   string
+		fields fields
+		want   int
+	}{
+		{
+			//4 red, 2 green, and 6 blue cubes
+			name: "oneInEachGame",
+			fields: fields{
+				red:   4,
+				blue:  6,
+				green: 2,
+			},
+			want: 48,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			foo := &Cubes{
+				red:   tt.fields.red,
+				blue:  tt.fields.blue,
+				green: tt.fields.green,
+			}
+			if got := foo.getPower(); got != tt.want {
+				t.Errorf("Cubes.getPower() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
