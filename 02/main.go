@@ -57,7 +57,6 @@ func main() {
 		c := maxCubes(usedCubes)
 
 		if validCubes.isValid(c) {
-			fmt.Printf("%v: %v\n", i+1, c)
 			sum += i + 1
 		}
 	}
